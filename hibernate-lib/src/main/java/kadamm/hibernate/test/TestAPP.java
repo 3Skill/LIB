@@ -1,7 +1,7 @@
 package kadamm.hibernate.test;
 
-import kadamm.hibernate.dao.UsuariDao;
-import kadamm.hibernate.model.Usuari;
+import kadamm.hibernate.dao.*;
+import kadamm.hibernate.model.*;
 
 public class TestAPP {
 	
