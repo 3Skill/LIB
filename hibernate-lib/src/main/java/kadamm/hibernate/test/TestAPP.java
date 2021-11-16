@@ -16,9 +16,9 @@ public class TestAPP {
 		Usuari usuari1 = new Usuari("VMV", "VMerchanHitler");
 		Usuari usuari2 = new Usuari("JoseMRN", "Coleta69");
 		
-		usuariDao.guardarUsuari(usuari);
-		usuariDao.guardarUsuari(usuari1);
-		usuariDao.guardarUsuari(usuari2);
+		usuariDao.saveUsuari(usuari);
+		usuariDao.saveUsuari(usuari1);
+		usuariDao.saveUsuari(usuari2);
 
 	}
 

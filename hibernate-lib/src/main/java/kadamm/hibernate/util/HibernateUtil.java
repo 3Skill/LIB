@@ -8,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
-import kadamm.hibernate.model.Usuari;
+import kadamm.hibernate.model.*;
 
 
 public class HibernateUtil {
@@ -31,13 +31,16 @@ public class HibernateUtil {
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-                settings.put(Environment.HBM2DDL_AUTO, "create");
+                settings.put(Environment.HBM2DDL_AUTO, "update");
                 
 
                 configuration.setProperties(settings);
 
                 //configuration.addAnnotatedClass(Table1.class);
                 configuration.addAnnotatedClass(Usuari.class);
+                configuration.addAnnotatedClass(Kahoot.class);
+                configuration.addAnnotatedClass(Preguntes.class);
+                configuration.addAnnotatedClass(Respostes.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
