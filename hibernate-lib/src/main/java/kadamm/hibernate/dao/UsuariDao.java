@@ -12,7 +12,7 @@ public class UsuariDao {
 		
 	}
 	
-	public void guardarUsuari(Usuari usuari) {
+	public void saveUsuari(Usuari usuari) {
 		Transaction transaction = null;
 		
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
@@ -31,7 +31,7 @@ public class UsuariDao {
 		}
 	}
 	
-	public void actualitzarUsuari(Usuari usuari) {
+	public void updateUsuari(Usuari usuari) {
 		Transaction transaction = null;
 		
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
@@ -51,7 +51,7 @@ public class UsuariDao {
 		}
 	}
 	
-	public Usuari recuperarUsuariPerID(long id) {
+	public Usuari getUsuariByID(long id) {
 		Transaction transaction = null;
 		Usuari student = null;
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
@@ -72,7 +72,7 @@ public class UsuariDao {
 		return student;
 	}
 	
-	public void eliminarUsuari(Usuari usuari) {
+	public void removeUsuari(Usuari usuari) {
 		Transaction transaction = null;
 		
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
@@ -88,6 +88,34 @@ public class UsuariDao {
 				transaction.rollback();
 			}
 		}
+	}
+	
+	public Usuari getUsuariByName(String nom) {
+		System.out.println("Entrando a la funcion");
+		Transaction transaction = null;
+		System.out.println("transaccion null");
+		Usuari usuari = null;
+		System.out.println("Usuario null");
+		try(Session session = HibernateUtil.getSessionFactory().openSession()){
+			// start the transaction
+			transaction = session.beginTransaction();
+			System.out.println("Begin transaction");
+			System.out.println(nom);
+			
+			
+			// get student object
+			usuari = (Usuari) session.createQuery("FROM Usuari WHERE nickName = '"+nom+"'").list().get(0);
+			System.out.println("get student object");
+//			student = session.load(Student.class, id);
+			
+			// commit the transaction
+			transaction.commit();
+		}catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		}
+		return usuari;
 	}
 	
 	
