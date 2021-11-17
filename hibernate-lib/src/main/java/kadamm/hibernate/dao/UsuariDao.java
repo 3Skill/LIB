@@ -114,6 +114,7 @@ public class UsuariDao {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+		
 		}
 		return usuari;
 	}
