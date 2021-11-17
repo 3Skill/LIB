@@ -17,7 +17,7 @@ public class Preguntes {
 
     @Column(name = "descripcio")
     private String descripcio;
-
+    
     @Column(name = "idKahoot")
     private long idKahoot;
 

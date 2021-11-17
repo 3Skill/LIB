@@ -20,7 +20,7 @@ public class Respostes {
 
     @Column(name = "respostaCorrecta")
     private boolean respostaCorrecta;
-
+    
     @Column(name = "idPregunta")
     private long idPregunta;
 
