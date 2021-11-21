@@ -1,32 +1,42 @@
 package kadamm.hibernate.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "preguntes")
 public class Preguntes {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idPreguntes")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idPreguntes;
 
     @Column(name = "descripcio")
     private String descripcio;
     
-    @Column(name = "idKahoot")
-    private long idKahoot;
+    @ManyToOne(targetEntity=Kahoot.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idKahoot")
+    private Kahoot kahoot;
+    
+    @OneToMany(mappedBy = "preguntes", cascade = CascadeType.ALL, orphanRemoval = true)
+   	private List<Respostes> respostes;
+    
 
     public Preguntes() {
     }
 
-    public Preguntes(String descripcio, long idKahoot) {
+    public Preguntes(String descripcio, Kahoot kahoot) {
         this.descripcio = descripcio;
-        this.idKahoot = idKahoot;
+        this.kahoot = kahoot;
     }
 
     public long getIdPreguntes() {
@@ -45,12 +55,12 @@ public class Preguntes {
         this.descripcio = descripcio;
     }
 
-    public long getIdKahoot() {
-        return idKahoot;
+    public Kahoot getIdKahoot() {
+        return kahoot;
     }
 
-    public void setIdKahoot(long idKahoot) {
-        this.idKahoot = idKahoot;
+    public void setIdKahoot(Kahoot kahoot) {
+        this.kahoot = kahoot;
     }
 
 

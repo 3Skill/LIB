@@ -110,4 +110,21 @@ public class KahootDao {
         }
         return kahoot;
     }
+    
+    public List<Kahoot> getAllKahootsByUsuari(long idUsuari) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<Kahoot> kahoots = null;
+        try {
+            transaction = session.beginTransaction();
+            kahoots = session.createQuery("FROM Kahoot WHERE idUsuari = :idUsuari").setParameter("idUsuari", idUsuari).list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return kahoots;
+    }
 }
