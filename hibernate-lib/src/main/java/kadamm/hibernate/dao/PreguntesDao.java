@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import kadamm.hibernate.model.Preguntes;
+import kadamm.hibernate.model.Usuari;
 import kadamm.hibernate.util.HibernateUtil;
 
 public class PreguntesDao {
@@ -62,11 +63,24 @@ public class PreguntesDao {
     }
 
     // Create method to get preguntes from database with hibernate
-    public Preguntes getPregunta(int id) {
+    public Preguntes getPreguntaById(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Preguntes preguntes = null;
         try {
             preguntes = (Preguntes) session.get(Preguntes.class, id);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return preguntes;
+    }
+    
+    public Preguntes getPregunta(String text) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Preguntes preguntes = null;
+        try {
+            preguntes = (Preguntes) session.createQuery("FROM Preguntes WHERE descripcio = '"+text+"'").list().get(0);
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
@@ -95,6 +109,32 @@ public class PreguntesDao {
         List<Preguntes> preguntes = new ArrayList<Preguntes>();
         try {
             preguntes = (List<Preguntes>)session.createQuery("from Preguntes where idKahoot = " + idKahoot).list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return preguntes;
+    }
+    
+    public List<Preguntes> getAllPreguntesByKahootName(String titolKahoot) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Preguntes> preguntes = new ArrayList<Preguntes>();
+        try {
+            preguntes = (List<Preguntes>)session.createQuery("from Preguntes INNER JOIN Kahoot on Preguntes.idKahoot = Kahoot.idKahoot where Kahoot.nom = " + titolKahoot).getResultList();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return preguntes;
+    }
+    
+    public List<Preguntes> getAllPreguntesWithoutKahoot() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Preguntes> preguntes = new ArrayList<Preguntes>();
+        try {
+            preguntes = (List<Preguntes>)session.createQuery("from Preguntes where idKahoot = NULL").list();
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {

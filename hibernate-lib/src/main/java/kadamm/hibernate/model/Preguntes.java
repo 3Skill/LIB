@@ -33,6 +33,10 @@ public class Preguntes {
 
     public Preguntes() {
     }
+    
+    public Preguntes(String descripcio) {
+        this.descripcio = descripcio;
+    }
 
     public Preguntes(String descripcio, Kahoot kahoot) {
         this.descripcio = descripcio;

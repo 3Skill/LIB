@@ -91,21 +91,13 @@ public class UsuariDao {
 	}
 	
 	public Usuari getUsuariByName(String nom) {
-		System.out.println("Entrando a la funcion");
 		Transaction transaction = null;
-		System.out.println("transaccion null");
 		Usuari usuari = null;
-		System.out.println("Usuario null");
 		try(Session session = HibernateUtil.getSessionFactory().openSession()){
 			// start the transaction
 			transaction = session.beginTransaction();
-			System.out.println("Begin transaction");
-			System.out.println(nom);
-			
-			
 			// get student object
 			usuari = (Usuari) session.createQuery("FROM Usuari WHERE nickName = '"+nom+"'").list().get(0);
-			System.out.println("get student object");
 //			student = session.load(Student.class, id);
 			
 			// commit the transaction

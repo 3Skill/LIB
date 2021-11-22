@@ -31,7 +31,7 @@ public class HibernateUtil {
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-                settings.put(Environment.HBM2DDL_AUTO, "create");
+                settings.put(Environment.HBM2DDL_AUTO, "update");
                 
 
                 configuration.setProperties(settings);
@@ -41,7 +41,9 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Kahoot.class);
                 configuration.addAnnotatedClass(Preguntes.class);
                 configuration.addAnnotatedClass(Respostes.class);
-
+                configuration.addAnnotatedClass(Concurs.class);
+                configuration.addAnnotatedClass(Concursant.class);
+                
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
 

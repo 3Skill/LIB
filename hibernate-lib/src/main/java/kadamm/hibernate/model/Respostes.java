@@ -29,6 +29,11 @@ public class Respostes {
 
     public Respostes() {
     }
+    
+    public Respostes(String descripcio, boolean respostaCorrecta) {
+        this.descripcio = descripcio;
+        this.respostaCorrecta = respostaCorrecta;
+    }
 
     public Respostes(String descripcio, boolean respostaCorrecta, Preguntes pregunta) {
         this.descripcio = descripcio;
