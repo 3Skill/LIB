@@ -63,7 +63,7 @@ public class PreguntesDao {
     }
 
     // Create method to get preguntes from database with hibernate
-    public Preguntes getPreguntaById(int id) {
+    public Preguntes getPreguntaById(long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Preguntes preguntes = null;
         try {

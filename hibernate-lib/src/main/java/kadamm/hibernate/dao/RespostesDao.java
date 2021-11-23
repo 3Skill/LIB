@@ -1,5 +1,7 @@
 package kadamm.hibernate.dao;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -71,6 +73,21 @@ public class RespostesDao {
          session.close();
      }
      return resposta;
+ }
+ 
+ public List<Respostes> getRespostesByPreguntaId(long id){
+	 Session session = HibernateUtil.getSessionFactory().openSession();
+	 List<Respostes> respostes = null;
+	 try {
+		 respostes = session.createQuery("from Respostes where preguntes = " + id).list();
+//    	 respostes = (List<Respostes>)session.get(Respostes.class, id);
+//		 respostes = (List<Respostes>) session.createQuery("FROM respostes WHERE idPreguntes = :idPreguntes").setParameter("idPreguntes", id).list();
+     } catch (HibernateException e) {
+         e.printStackTrace();
+     } finally {
+         session.close();
+     }
+     return respostes;
  }
  
 // // Create a method to get the correct Respostes object
