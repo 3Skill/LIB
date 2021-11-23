@@ -41,7 +41,9 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Kahoot.class);
                 configuration.addAnnotatedClass(Preguntes.class);
                 configuration.addAnnotatedClass(Respostes.class);
-
+                configuration.addAnnotatedClass(Concurs.class);
+                configuration.addAnnotatedClass(Concursant.class);
+                
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
 

@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import kadamm.hibernate.model.Kahoot;
+import kadamm.hibernate.model.Usuari;
 import kadamm.hibernate.util.HibernateUtil;
 
 public class KahootDao {
@@ -58,7 +59,7 @@ public class KahootDao {
     }
 
     // create method to get a kahoot from database with hibernate by id
-    public Kahoot getKahoot(int id) {
+    public Kahoot getKahoot(long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         Kahoot kahoot = null;
@@ -94,13 +95,13 @@ public class KahootDao {
     }
 
     // create method to get a kahoot from database with hibernate by name
-    public Kahoot getKahootByName(String name) {
+    public Kahoot getKahootByName(String nom) {
     	Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         Kahoot kahoot = null;
         try {
             transaction = session.beginTransaction();
-            kahoot = (Kahoot) session.createQuery("FROM Kahoot WHERE name = :name").setParameter("name", name).uniqueResult();
+            kahoot = (Kahoot) session.createQuery("FROM Kahoot WHERE nom = :nom").setParameter("nom", nom).list().get(0);
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
@@ -109,5 +110,22 @@ public class KahootDao {
             session.close();
         }
         return kahoot;
+    }
+    
+    public List<Kahoot> getAllKahootsByUsuari(long idUsuari) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<Kahoot> kahoots = null;
+        try {
+            transaction = session.beginTransaction();
+            kahoots = session.createQuery("FROM Kahoot WHERE idUsuari = :idUsuari").setParameter("idUsuari", idUsuari).list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return kahoots;
     }
 }

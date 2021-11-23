@@ -1,10 +1,13 @@
 package kadamm.hibernate.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,28 +15,33 @@ import javax.persistence.Table;
 public class Respostes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idResposta")
-    private int idResposta;
+    private long idResposta;
 
     @Column(name = "descripcio")
     private String descripcio;
 
     @Column(name = "respostaCorrecta")
     private boolean respostaCorrecta;
-
-    @Column(name = "idPregunta")
-    private long idPregunta;
+    
+    @ManyToOne(targetEntity = Preguntes.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="idPreguntes")
+    private Preguntes preguntes;
 
     public Respostes() {
     }
-
-    public Respostes(String descripcio, boolean respostaCorrecta, long idPregunta) {
+    
+    public Respostes(String descripcio, boolean respostaCorrecta) {
         this.descripcio = descripcio;
         this.respostaCorrecta = respostaCorrecta;
-        this.idPregunta = idPregunta;
     }
 
-    public int getIdResposta() {
+    public Respostes(String descripcio, boolean respostaCorrecta, Preguntes pregunta) {
+        this.descripcio = descripcio;
+        this.respostaCorrecta = respostaCorrecta;
+        this.preguntes = pregunta;
+    }
+
+    public long getIdResposta() {
         return idResposta;
     }
 
@@ -57,12 +65,12 @@ public class Respostes {
         this.respostaCorrecta = respostaCorrecta;
     }
 
-    public long getIdPregunta() {
-        return idPregunta;
+    public Preguntes getIdPregunta() {
+        return preguntes;
     }
 
-    public void setIdPregunta(long idPregunta) {
-        this.idPregunta = idPregunta;
+    public void setIdPregunta(Preguntes pregunta) {
+        this.preguntes = pregunta;
     }
 
 

@@ -1,10 +1,16 @@
 package kadamm.hibernate.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,23 +18,31 @@ import javax.persistence.Table;
 public class Kahoot {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_Kahoot")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idKahoot;
 
     @Column(name = "nom")
     private String nom;
-
-    @Column(name = "id_Usuari")
-    private long idUsuari;
+    
+    
+    @ManyToOne(targetEntity=Usuari.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="idUsuari")
+    private Usuari usuari;
+    
+    @OneToMany(mappedBy = "kahoot", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Preguntes> preguntes;
 
     public Kahoot() {
 
     }
+    
+    public Kahoot(String nom) {
+    	this.nom = nom;
+    }
 
-    public Kahoot(String nom, long idUsuari) {
+    public Kahoot(String nom, Usuari usuari) {
         this.nom = nom;
-        this.idUsuari = idUsuari;
+        this.usuari = usuari;
     }
 
     public long getIdKahoot() {
@@ -47,12 +61,12 @@ public class Kahoot {
         this.nom = nom;
     }
 
-    public long getIdUsuari() {
-        return idUsuari;
+    public Usuari getIdUsuari() {
+        return usuari;
     }
 
-    public void setIdUsuari(int idUsuari) {
-        this.idUsuari = idUsuari;
+    public void setIdUsuari(Usuari usuari) {
+        this.usuari = usuari;
     }
 
 }
