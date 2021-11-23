@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import kadamm.hibernate.model.Kahoot;
+import kadamm.hibernate.model.Usuari;
 import kadamm.hibernate.util.HibernateUtil;
 
 public class KahootDao {
