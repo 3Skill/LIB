@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +27,9 @@ public class Respostes {
     @ManyToOne(targetEntity = Preguntes.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="idPreguntes")
     private Preguntes preguntes;
+    
+    @ManyToOne
+    private Torn torn;
 
     public Respostes() {
     }

@@ -24,14 +24,14 @@ public class HibernateUtil {
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
                 settings.put(Environment.URL, "jdbc:mysql://localhost:3306/kadammDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
                 settings.put(Environment.USER, "root");
-                settings.put(Environment.PASS, "");
+                settings.put(Environment.PASS, "toor");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
 
                 settings.put(Environment.SHOW_SQL, "true");
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-                settings.put(Environment.HBM2DDL_AUTO, "update");
+                settings.put(Environment.HBM2DDL_AUTO, "create");
                 
 
                 configuration.setProperties(settings);
@@ -43,6 +43,7 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Respostes.class);
                 configuration.addAnnotatedClass(Concurs.class);
                 configuration.addAnnotatedClass(Concursant.class);
+                configuration.addAnnotatedClass(Torn.class);
                 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

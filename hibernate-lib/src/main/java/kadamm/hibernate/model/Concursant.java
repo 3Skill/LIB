@@ -1,6 +1,7 @@
 package kadamm.hibernate.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,24 +33,34 @@ public class Concursant {
 	@Column(name="password")
     private String password;
 	
-	@ManyToMany( cascade = {
-			CascadeType.PERSIST,
-			CascadeType.MERGE
-	})
-	@JoinTable(name="concursant_concurs",
-	joinColumns = {@JoinColumn(name="idConcursant")},
-	inverseJoinColumns = {@JoinColumn(name="idConcurs")}
-	)
-	private List<Concurs> concursos;
+//	@ManyToMany( cascade = {
+//			CascadeType.PERSIST,
+//			CascadeType.MERGE
+//	})
+//	@JoinTable(name="concursant_concurs",
+//	joinColumns = {@JoinColumn(name="idConcursant")},
+//	inverseJoinColumns = {@JoinColumn(name="idConcurs")}
+//	)
+//	private List<Concurs> concursos;
 
 
-    public List<Concurs> getConcurs() {
-		return concursos;
-	}
-
-	public void setConcurs(List<Concurs> concursos) {
-		this.concursos = concursos;
-	}
+//    public List<Concurs> getConcurs() {
+//		return concursos;
+//	}
+//
+//	public void setConcurs(List<Concurs> concursos) {
+//		this.concursos = concursos;
+//	}
+	
+	@ManyToOne
+    private Concurs concurs;
+	
+	public void setConcurs(Concurs concurs) {
+		this.concurs = concurs;
+	};
+	
+	@OneToMany(mappedBy = "concursant")
+    Set<Torn> torns = new HashSet<>();
 
 	public Concursant() {
 		super();
