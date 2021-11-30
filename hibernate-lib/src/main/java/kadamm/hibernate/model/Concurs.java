@@ -26,6 +26,7 @@ public class Concurs {
     @Column(name = "idKahoot")
     private long idKahoot;
     
+    
 //    @Column(name = "idConcursant")
 //    private long idConcursant;
     
