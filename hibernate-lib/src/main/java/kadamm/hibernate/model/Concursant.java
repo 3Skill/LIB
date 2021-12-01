@@ -1,6 +1,7 @@
 package kadamm.hibernate.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -41,13 +44,23 @@ public class Concursant {
 	private List<Concurs> concursos;
 
 
-    public List<Concurs> getConcurs() {
-		return concursos;
-	}
-
-	public void setConcurs(List<Concurs> concursos) {
-		this.concursos = concursos;
-	}
+//    public List<Concurs> getConcurs() {
+//		return concursos;
+//	}
+//
+//	public void setConcurs(List<Concurs> concursos) {
+//		this.concursos = concursos;
+//	}
+	
+//	@ManyToOne
+//    private Concurs concurs;
+	
+	public void setConcurs(List<Concurs> concurs) {
+		this.concursos = concurs;
+	};
+	
+	@OneToMany(mappedBy = "concursant")
+    Set<Torn> torns = new HashSet<>();
 
 	public Concursant() {
 		super();
@@ -58,7 +71,11 @@ public class Concursant {
         this.password = password;
     }
 
-    public long getIdConcursant() {
+    public Concursant(String nickname) {
+    	this.nickname = nickname;
+	}
+
+	public long getIdConcursant() {
         return idConcursant;
     }
 

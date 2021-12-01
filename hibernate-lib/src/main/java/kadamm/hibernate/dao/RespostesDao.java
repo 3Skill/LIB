@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import kadamm.hibernate.model.Concursant;
 import kadamm.hibernate.model.Preguntes;
 import kadamm.hibernate.model.Respostes;
 import kadamm.hibernate.model.Usuari;
@@ -73,6 +74,22 @@ public class RespostesDao {
          session.close();
      }
      return resposta;
+ }
+ 
+ public Respostes getRespostaByText(String text) {
+ 	Transaction transaction = null;
+ 	Respostes resposta = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()){
+			
+			transaction = session.beginTransaction();
+			resposta = (Respostes) session.createQuery("from Respostes where descripcio = '" + text + "'").list().get(0);
+			transaction.commit();
+		} catch (HibernateException he) {
+			// TODO Auto-generated catch block
+			he.printStackTrace();
+		}
+     return resposta;
+
  }
  
  public List<Respostes> getRespostesByPreguntaId(long id){

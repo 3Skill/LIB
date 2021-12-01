@@ -1,6 +1,8 @@
 package kadamm.hibernate.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,6 +31,9 @@ public class Preguntes {
     
     @OneToMany(mappedBy = "preguntes", cascade = CascadeType.ALL, orphanRemoval = true)
    	private List<Respostes> respostes;
+    
+    @OneToMany(mappedBy = "preguntes")
+    Set<Torn> torns = new HashSet<>();
     
 
     public Preguntes() {
