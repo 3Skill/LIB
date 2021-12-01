@@ -2,10 +2,12 @@ package kadamm.hibernate.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import kadamm.hibernate.model.Concursant;
+import kadamm.hibernate.model.Usuari;
 import kadamm.hibernate.util.HibernateUtil;
 
 public class ConcursantDao {
@@ -42,6 +44,22 @@ public class ConcursantDao {
         session.delete(concursant);
         transaction.commit();
         session.close();
+    }
+    
+    public Concursant getConcursantByName(String nom) {
+    	Transaction transaction = null;
+    	Concursant concursant = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()){
+			
+			transaction = session.beginTransaction();
+			concursant = (Concursant) session.createQuery("from Concursant where nickname = '" + nom + "'").list().get(0);
+			transaction.commit();
+		} catch (HibernateException he) {
+			// TODO Auto-generated catch block
+			he.printStackTrace();
+		}
+        return concursant;
+
     }
 
     public List<Concursant> getAllConcursants() {

@@ -17,20 +17,20 @@ public class ConcursDao {
     public ConcursDao() {
     }
     
-    public void addConcurs(Concurs concurs, List<Concursant> concursants) {
-    	Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.save(concurs);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
+//    public void addConcurs(Concurs concurs, List<Concursant> concursants) {
+//    	Session session = HibernateUtil.getSessionFactory().openSession();
+//        Transaction tx = null;
+//        try {
+//            tx = session.beginTransaction();
+//            session.save(concurs);
+//            tx.commit();
+//        } catch (HibernateException e) {
+//            if (tx != null) tx.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
+//    }
     
     public void updateConcurs(Concurs concurs) {
     	Session session = HibernateUtil.getSessionFactory().openSession();

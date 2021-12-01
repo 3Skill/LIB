@@ -124,6 +124,12 @@ public class Torn {
 
 
 
+	public Torn() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public TornId getTornId() {
 		return tornId;
 	}

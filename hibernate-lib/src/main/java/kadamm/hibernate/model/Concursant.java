@@ -71,7 +71,11 @@ public class Concursant {
         this.password = password;
     }
 
-    public long getIdConcursant() {
+    public Concursant(String nickname) {
+    	this.nickname = nickname;
+	}
+
+	public long getIdConcursant() {
         return idConcursant;
     }
 
