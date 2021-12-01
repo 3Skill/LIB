@@ -31,18 +31,18 @@ public class Concurs {
 //    private long idConcursant;
     
     	// Save
-//    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, 
-//    		mappedBy = "concursos",
-//    		targetEntity=Concursant.class
-//    		)
-//	private List<Concursant> concursants = new ArrayList<Concursant>();
+    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, 
+    		mappedBy = "concursos",
+    		targetEntity=Concursant.class
+    		)
+	private List<Concursant> concursants = new ArrayList<Concursant>();
     
-    @OneToMany
-    private List<Concursant> concursants = new ArrayList<Concursant>();
+//    @OneToMany
+//    private List<Concursant> concursants = new ArrayList<Concursant>();
     
     public void addConcursant(Concursant concursant) {
         this.concursants.add(concursant);
-        concursant.setConcurs(this);
+//        concursant.setConcurs(this);
     }
     
     @OneToMany(mappedBy = "concurs")

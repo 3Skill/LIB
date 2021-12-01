@@ -33,15 +33,15 @@ public class Concursant {
 	@Column(name="password")
     private String password;
 	
-//	@ManyToMany( cascade = {
-//			CascadeType.PERSIST,
-//			CascadeType.MERGE
-//	})
-//	@JoinTable(name="concursant_concurs",
-//	joinColumns = {@JoinColumn(name="idConcursant")},
-//	inverseJoinColumns = {@JoinColumn(name="idConcurs")}
-//	)
-//	private List<Concurs> concursos;
+	@ManyToMany( cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+	})
+	@JoinTable(name="concursant_concurs",
+	joinColumns = {@JoinColumn(name="idConcursant")},
+	inverseJoinColumns = {@JoinColumn(name="idConcurs")}
+	)
+	private List<Concurs> concursos;
 
 
 //    public List<Concurs> getConcurs() {
@@ -52,11 +52,11 @@ public class Concursant {
 //		this.concursos = concursos;
 //	}
 	
-	@ManyToOne
-    private Concurs concurs;
+//	@ManyToOne
+//    private Concurs concurs;
 	
-	public void setConcurs(Concurs concurs) {
-		this.concurs = concurs;
+	public void setConcurs(List<Concurs> concurs) {
+		this.concursos = concurs;
 	};
 	
 	@OneToMany(mappedBy = "concursant")
